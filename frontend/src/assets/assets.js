@@ -1,9 +1,17 @@
 import logo from './images/logo.png';
-import {Home, User, Upload, CalendarDays} from 'lucide-react'
+import {Home, User, Upload, CalendarDays, Search, Filter} from 'lucide-react'
 
 
-export const assets = {
+export const images = {
     logo
+}
+
+export const icons = {
+    Home,
+    User,
+    Upload,
+    CalendarDays,
+    Search
 }
 
 export const menuItems = [
@@ -46,8 +54,31 @@ export const ipcrSubmissionModule = [
         end_date: "June 30, 2026",
         quarter: "Q1",
         year: "2026",
-        status: "close",
+        status: "open",
         note: "upload your accomplished ipcr (Excel File Only)"
+    }
+]
+
+export const ipcrModule = [
+    {
+        ipcr_id: 1,
+        type: 'IPCR',
+        ipcr_submission_id: 1,
+        user_id: 7,
+        file_name: 'IPCR_Angelo.xls',
+        date_submitted: 'June 10, 2026',
+        status: 'Pending',
+        current_step: 1
+    },
+    {
+        ipcr_id: 2,
+        type: 'IPCR',
+        ipcr_submission_id: 1,
+        user_id: 8,
+        file_name: 'IPCR_Angelo.xls',
+        date_submitted: 'June 20, 2026',
+        status: 'Pending',
+        current_step: 1
     }
 ]
 

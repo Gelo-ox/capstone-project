@@ -1,6 +1,6 @@
 import React from 'react'
 import { menuItems } from '../assets/assets.js'
-import { assets, users } from '../assets/assets.js'
+import { images, users } from '../assets/assets.js'
 import {NavLink} from 'react-router-dom'
 import {Home} from 'lucide-react'
 
@@ -13,7 +13,7 @@ const Sidebar = () => {
     return (
         <aside className='h-screen bg-[#31511E] p-4 w-sm'>
             <div className='flex items-center gap-5'>
-                <img src={assets.logo} className='w-20'/>
+                <img src={images.logo} className='w-20'/>
                 <h2 className='text-3xl text-white font-bold'>SPMS</h2>
             </div>
             <hr className='mt-5 mb-20 text-white' />

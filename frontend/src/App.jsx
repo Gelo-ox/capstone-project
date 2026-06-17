@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import IpcrSubmission from './pages/IpcrSubmission.jsx'
+import ForReview from './pages/ForReview.jsx'
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Dashboard/>}/>
             <Route path='/submission' element={<IpcrSubmission/>}/>
+            <Route path='/review' element={<ForReview/>}/>
           </Routes>
         </main>
         
