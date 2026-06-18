@@ -91,7 +91,7 @@ export const users = [
         VP: "VPAA",
         username: "roysearcajose",
         password: "12345678",
-        role: "dean"
+        role: ["dean","Chief"]
     },
     {
         user_id: 2,
