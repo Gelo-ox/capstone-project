@@ -6,6 +6,7 @@ import Navbar from './components/Navbar.jsx'
 import IpcrSubmission from './pages/IpcrSubmission.jsx'
 import ForReview from './pages/ForReview.jsx'
 import Users from './pages/Users.jsx'
+import SubmissionManagement from './pages/SubmissionManagement.jsx'
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route path='/submission' element={<IpcrSubmission/>}/>
             <Route path='/review' element={<ForReview/>}/>
             <Route path='/users' element={<Users/>}/>
+            <Route path='/submission-management' element={<SubmissionManagement/>}/>
           </Routes>
         </main>
         

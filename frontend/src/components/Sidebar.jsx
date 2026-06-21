@@ -27,7 +27,7 @@ const Sidebar = () => {
                                 <NavLink to={item.path} key={item.label} className={navLinkClass}>
                                     <div className='flex gap-7 items-center'>
                                         <Icon className='font-bold text-white w-8 h-8' strokeWidth={2.5}/>
-                                        <p className='text-white'>{item.label}</p>
+                                        <p className='text-white truncate'>{item.label}</p>
                                     </div>
                                 </NavLink>
                             )

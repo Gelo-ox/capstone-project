@@ -1,5 +1,5 @@
 import logo from './images/logo.png';
-import {Home, User, Upload, CalendarDays, Search, Filter} from 'lucide-react'
+import {Home, User, Upload, CalendarDays, Search, Filter, PlusCircle, Calendar} from 'lucide-react'
 
 
 export const images = {
@@ -11,7 +11,10 @@ export const icons = {
     User,
     Upload,
     CalendarDays,
-    Search
+    Search,
+    Filter,
+    PlusCircle,
+    Calendar
 }
 
 export const menuItems = [
@@ -24,6 +27,12 @@ export const menuItems = [
     {
         label: "IPCR Submission",
         path: "/submission",
+        roles: ["HR","PDO","staff","department head"],
+        icon: Upload
+    },
+    {
+        label: "Submission Management",
+        path: "/submission-management",
         roles: ["HR","PDO","staff","department head"],
         icon: Upload
     },
