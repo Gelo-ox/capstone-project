@@ -7,30 +7,21 @@ import IpcrSubmission from './pages/IpcrSubmission.jsx'
 import ForReview from './pages/ForReview.jsx'
 import Users from './pages/Users.jsx'
 import SubmissionManagement from './pages/SubmissionManagement.jsx'
+import Login from './pages/Login.jsx'
+import Layout from './components/Layout.jsx'
 
 const App = () => {
-
-
   return ( 
-    <div className='h-screen w-full flex overflow-hidden'>
-      <div className='shrink-0'>
-        <Sidebar/>
-      </div>
-      <div className='flex-1 overflow-y-scroll bg-[#F5F5F7]'>
-        <Navbar/>
-        <main>
-          <Routes>
-            <Route path='/' element={<Dashboard/>}/>
-            <Route path='/submission' element={<IpcrSubmission/>}/>
-            <Route path='/review' element={<ForReview/>}/>
-            <Route path='/users' element={<Users/>}/>
-            <Route path='/submission-management' element={<SubmissionManagement/>}/>
-          </Routes>
-        </main>
-        
-      </div>
-
-    </div>
+      <Routes>
+        <Route path='/login' element={<Login/>}/>
+        <Route element={<Layout/>}>
+          <Route path='/' element={<Dashboard/>}/>
+          <Route path='/submission' element={<IpcrSubmission/>}/>
+          <Route path='/review' element={<ForReview/>}/>
+          <Route path='/users' element={<Users/>}/>
+          <Route path='/submission-management' element={<SubmissionManagement/>}/>
+        </Route>
+      </Routes>
   )
 
 }

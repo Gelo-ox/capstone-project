@@ -25,7 +25,7 @@ const SubmissionManagement = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex justify-around p-5 bg-white mt-10 rounded-2xl shadow-sm'>
+            <div className='flex justify-around items-center p-5 bg-white mt-10 rounded-2xl shadow-sm'>
                 <div>
                     <p className='text-xl font-medium'>Current Status</p>
                     <p className='text-5xl font-medium text-green-600 mb-8'>{ipcrSubmission.status}</p>
@@ -33,7 +33,7 @@ const SubmissionManagement = () => {
                     <p className='text-xl  inline'>Submission ends in: </p>
                     <p className='text-xl font-medium inline'>{ipcrSubmission.end_date}</p>
                 </div>
-                <div className='w-0.5 bg-gray-600 justify-self-stretch'>
+                <div className='w-0.5 bg-gray-600 self-stretch'>
                 </div>
                 <div className='flex flex-col gap-3'>
                     <div className='flex items-center gap-5'>
@@ -56,10 +56,10 @@ const SubmissionManagement = () => {
                 </div>
                 <div className='grid grid-cols-[1fr_1fr_1fr_1fr] items-center p-5 rounded-sm hover:bg-gray-100 mt-5 text-xl'>
                     <p>{ipcrSubmission.quarter}</p>
-                    <p>{ipcrSubmission.status}</p>
+                    <p className='bg-green-200 rounded-full text-green-600 px-3 py-2 border-2 justify-self-start'>{ipcrSubmission.status}</p>
                     <p>{ipcrSubmission.start_date} - {ipcrSubmission.end_date}</p>
                     <p className=''>
-                        <button className='border-blue-600 border-2 py-3 px-5 rounded-sm'>View</button>
+                        <button className='border-blue-600 border-2 py-3 px-5 rounded-sm cursor-pointer'>View</button>
                     </p>
                 </div>
             </div>

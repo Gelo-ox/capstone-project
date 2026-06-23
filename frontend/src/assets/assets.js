@@ -1,9 +1,13 @@
 import logo from './images/logo.png';
-import {Home, User, Upload, CalendarDays, Search, Filter, PlusCircle, Calendar} from 'lucide-react'
+import userIcon from './images/user-icon.png'
+import passwordIcon from './images/password-icon.png'
+import {Home, User, Upload, CalendarDays, Search, Filter, PlusCircle, Calendar, Eye, Folder} from 'lucide-react'
 
 
 export const images = {
-    logo
+    logo,
+    userIcon,
+    passwordIcon
 }
 
 export const icons = {
@@ -34,13 +38,13 @@ export const menuItems = [
         label: "Submission Management",
         path: "/submission-management",
         roles: ["HR","PDO","staff","department head"],
-        icon: Upload
+        icon: Folder
     },
     {
         label: "For Review",
         path: "/review",
         roles: ["HR","PDO","department head"],
-        icon: Upload
+        icon: Eye
     },
     {
         label: "Users",
