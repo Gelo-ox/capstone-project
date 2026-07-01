@@ -16,7 +16,7 @@ const PieChartComponent = () => {
     ]
 
     return (
-        <PieChart className='bg-white shadow-sm rounded-2xl p-10' width={800} height={400}>
+        <PieChart className='bg-white shadow-sm rounded-2xl p-5' width={500} height={300}>
             <Pie data={data} dataKey="value" label>
                 {data.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={colors[index]}/>

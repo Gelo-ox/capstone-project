@@ -17,7 +17,7 @@ const LineChartComponent = () => {
     ]
 
     return (
-        <LineChart className='bg-white shadow-sm rounded-2xl p-10' width={800} height={400} data={data}>
+        <LineChart className='bg-white shadow-sm rounded-2xl p-10' width={500} height={300} data={data}>
             <Line type="monotone" dataKey="react" stroke='#2196FE' strokeWidth={3}></Line>
             <CartesianGrid strokeDasharray="3 3"/>
             <XAxis dataKey="name"/>

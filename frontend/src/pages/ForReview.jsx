@@ -16,16 +16,16 @@ const ForReview = () => {
 
     return (
         <div className='p-10'> 
-            <h2 className='font-bold text-5xl mb-5'>IPCR Review</h2>
+            <h2 className='font-bold text-3xl mb-5'>IPCR Review</h2>
             <div className='bg-white rounded-sm p-5 overflow-x-auto'>
                 <div className='flex justify-end gap-10 mb-5'>
-                    <div className='flex p-3 rounded-md items-center gap-5 bg-gray-100'>
-                        <input type="text" placeholder='Search...' className=' text-xl focus:outline-none'/>
-                        <Search className='w-7 h-7'/>
+                    <div className='flex p-2 rounded-md items-center gap-5 bg-gray-100'>
+                        <input type="text" placeholder='Search...' className=' text-md focus:outline-none'/>
+                        <Search className='w-5 h-5'/>
                     </div>
-                    <div className='flex items-center bg-gray-100 p-3 gap-5'>
-                        <Filter/>
-                        <select name="" id="" className='rounded-md  text-xl focus:outline-none'>
+                    <div className='flex items-center bg-gray-100 p-2 gap-5'>
+                        <Filter className='w-5 h-5'/> 
+                        <select name="" id="" className='rounded-md  text-md focus:outline-none'>
                             <option value="Department">Department</option>
                             <option value="Name">Name</option>
                             <option value="College">College</option>
@@ -35,7 +35,7 @@ const ForReview = () => {
                 </div>
                 <div className='min-w-225'>
                 
-                    <div className='grid grid-cols-[1fr_1fr_2fr_2fr_2fr_1fr] bg-gray-200 p-5 text-xl font-medium mb-5 items-center'>
+                    <div className='grid grid-cols-[1fr_1fr_2fr_2fr_2fr_1fr] bg-gray-200 p-5 text-md font-medium mb-5 items-center'>
                         <p>#</p>
                         <p>Type</p>
                         <p>Name</p>
@@ -46,7 +46,7 @@ const ForReview = () => {
                     <div>
                         {
                         ipcr?.map(item => (
-                            <div key={item.ipcr_id} className='grid grid-cols-[1fr_1fr_2fr_2fr_2fr_1fr] p-5 text-xl hover:bg-gray-100 items-center'>
+                            <div key={item.ipcr_id} className='grid grid-cols-[1fr_1fr_2fr_2fr_2fr_1fr] p-2 text-md hover:bg-gray-100 items-center'>
                                 <p>{item.ipcr_id}</p>
                                 <p>{item.type}</p>
                                 <p className='truncate'>{allUsers[item.user_id - 1].name}</p>

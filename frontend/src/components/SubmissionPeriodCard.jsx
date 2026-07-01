@@ -14,16 +14,16 @@ const SubmissionPeriodCard = () => {
     console.log()
 
     return (
-        <div className='inline-flex p-3 rounded-2xl bg-white shadow-sm gap-7 items-center mb-10'>
+        <div className='inline-flex p-2 rounded-2xl bg-white shadow-sm gap-7 items-center mb-5'>
             <div>
-                <Calendar className='w-8 h-8'/>
+                <Calendar className='w-5 h-5'/>
             </div>
             <div>
-                <p className='font-medium text-xl'>Submission Period</p>
-                <p className='text-lg'>{submission?.start_date} - {submission?.start_date}</p>
+                <p className='font-medium text-md'>Submission Period</p>
+                <p className='text-sm'>{submission?.start_date} - {submission?.start_date}</p>
             </div>
             <div>
-                <p className={`px-2 py-1 rounded-full text-lg font-medium ${submissionStatus ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'}`}>{submission?.status}</p>
+                <p className={`px-2 py-1 rounded-full text-sm font-medium ${submissionStatus ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'}`}>{submission?.status}</p>
             </div>
         </div>
     )
