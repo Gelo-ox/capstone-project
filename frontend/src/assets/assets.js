@@ -1,7 +1,7 @@
 import logo from './images/logo.png';
 import userIcon from './images/user-icon.png'
 import passwordIcon from './images/password-icon.png'
-import {Home, User, Upload, CalendarDays, Search, Filter, PlusCircle, Calendar, Eye, Folder} from 'lucide-react'
+import {Home, User, Upload, CalendarDays, Search, Filter, PlusCircle, Calendar, Eye, Folder, X} from 'lucide-react'
 
 
 export const images = {
@@ -18,7 +18,8 @@ export const icons = {
     Search,
     Filter,
     PlusCircle,
-    Calendar
+    Calendar,
+    X
 }
 
 export const menuItems = [

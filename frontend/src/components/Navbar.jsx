@@ -1,7 +1,9 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { users } from '../assets/assets.js'
 import {BellIcon, User2} from 'lucide-react'
+import { replace, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContex.jsx'
 
 const Navbar = () => {
 
@@ -9,9 +11,19 @@ const Navbar = () => {
     const [isClicked, setIsClicked] = useState(false)
     const [notifClicked, setNotifClicked] = useState(false)
 
+    const {logout} = useContext(AuthContext)
+
+    const navigate = useNavigate()
+
     useEffect(() => {
         setUser(users[6])
     },[])
+    
+
+    const handleLogout = () => {
+        logout()
+        navigate("/login", {replace: true})
+    }
 
     return (
         <nav className='bg-[#FFF6F6] shadow-sm  py-2 px-5 flex justify-end'>
@@ -30,7 +42,7 @@ const Navbar = () => {
                     <div className={`absolute p-3 bg-white -bottom-45 -left-18 rounded-md shadow-md ${isClicked ? "block" : "hidden"}`}>
                         <span className='absolute border-b-18 border-b-white border-r-18 border-l-18 border-r-transparent border-l-transparent -top-4 left-22'></span>
                         <p className='whitespace-nowrap text-xl bg-white px-5 py-5 w-50 hover:bg-gray-100'>View Profile</p>
-                        <p className='whitespace-nowrap text-xl bg-white px-5 py-5 w-50 hover:bg-gray-100'>View Profile</p>
+                        <p onClick={handleLogout} className='whitespace-nowrap text-xl bg-white px-5 py-5 w-50 hover:bg-gray-100'>Logout</p>
                     </div>
                 </div>
                 <div className='flex flex-col items-center'>

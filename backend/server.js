@@ -1,21 +1,23 @@
 import express from 'express';
-import {connect, createDb} from './database/db.js'
+import {connect} from './database/db.js'
+import cors from 'cors'
+import userRouter from './routes/userRoute.js';
+import authRouter from './routes/authRouter.js';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 
-connect()
-createDb()
+app.use(cors())
+app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.send('Hello, Express');
-})
+app.use('/auth', authRouter)
+app.use('/user', userRouter)
 
-app.get('/user/:username', (req, res) => {
-    const username = req.params.username
-    res.send(`Welcome ${username}`)
-})
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Server is running on http://localhost:${PORT}`)
+    await connect()
 })

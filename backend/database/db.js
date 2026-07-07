@@ -1,6 +1,6 @@
 import mysql from 'mysql'
 
-const database = mysql.createConnection({
+const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     database: "spms",
@@ -9,7 +9,7 @@ const database = mysql.createConnection({
 
 
 export const connect = () => {
-    database.connect((err) => {
+    db.connect((err) => {
         if(err){
             console.log(err)
         }
@@ -17,4 +17,4 @@ export const connect = () => {
     })
 }
 
-export default connect
+export default db
