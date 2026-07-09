@@ -3,34 +3,34 @@ import bcrypt from 'bcrypt'
 
 export const addUser = async (req, res) => {
     try {
-        const {firstName, lastName, email, college, department, username, password, roles} = req.body
+        const {firstName, lastName, email, college, departmentId, username, password, roles} = req.body
         const roleString = JSON.stringify(roles)
     
-    if(!firstName || !lastName || !email || !college || !department || !username || !password || !roleString){
-        const error = new Error("All fields are required");
-        error.statusCode = 400;
-        return error;
-    } 
+        if(!firstName || !lastName || !email || !college || !departmentId || !username || !password || !roleString){
+            const error = new Error("All fields are required");
+            error.statusCode = 400;
+            return error;
+        } 
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    
-    const sql = `
-        INSERT INTO users
-        (first_Name, last_Name, email, college_id, department_id, username, password, role)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        
+        const sql = `
+            INSERT INTO users
+            (first_Name, last_Name, email, college_id, department_id, username, password, role)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
 
-    db.query(sql, [firstName, lastName, email, college, department, username, hashedPassword, roleString], (err, result) => {
-        if(err){
-            return res.status(500).json({
-                message: err.message
+        db.query(sql, [firstName, lastName, email, college, departmentId, username, hashedPassword, roleString], (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    message: err.message
+                })
+            }
+
+            res.status(201).json({
+                message: "User added successfully!"
             })
-        }
-
-        res.status(201).json({
-            message: "User added successfully!"
         })
-    })
     } catch (error) {
         console.log(error)
         return res.status(500).json({
@@ -41,17 +41,38 @@ export const addUser = async (req, res) => {
 }
 
 export const getAllUsers = (req, res) => {
+    const search = req.query.search || "";
+    const role = req.query.role || "";
 
-    const sql = "SELECT * from users";
+    // let sql = `SELECT * FROM users WHERE CONCAT(first_name, ' ', last_name) LIKE ?`;
+    let sql = `
+        SELECT
+            u.id,
+            u.first_name,
+            u.last_name,
+            u.college_id,
+            u.email,
+            d.department_name AS department,
+            u.username,
+            u.role
+        FROM users u
+        LEFT JOIN department d
+            ON u.department_id = d.department_id
+        WHERE CONCAT(u.first_name, ' ', u.last_name) LIKE ?
+    `;
+    const values = [`%${search}%`];
 
-    db.query(sql, (error, result) => {
+    if(role){
+        sql += ` AND u.role LIKE ?`;
+        values.push(`%${role}%`)
+    }
+
+    db.query(sql, values, (error, result) => {
         if(error){
             return res.status(500).json({
                 message: error.message
             })
         }
-
-        const roles = JSON.parse(result[0].role)
 
         const users = result.map(user => ({
             ...user,

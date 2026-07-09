@@ -64,7 +64,7 @@ const EditUserModal = ({onClose, onUserAdded, user}) => {
             onUserAdded()
             onClose()
             Swal.fire({
-                title: "User Added!",
+                title: "User Updated!",
                 icon: "success",
             });
 

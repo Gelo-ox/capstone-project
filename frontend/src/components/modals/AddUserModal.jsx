@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState, useContext } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -12,11 +12,27 @@ const AddUserModal = ({onClose, onUserAdded}) => {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [college, setCollege] = useState("")
-    const [department, setDepartment] = useState("")
+    const [departmentId, setDepartmentId] = useState("")
+    const [departments, setDepartments] = useState([])
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [roles, setRoles] = useState([])
     const {token} = useContext(AuthContext)
+
+    const fetchDepartments = async () => {
+        try {
+            const res = await axios.get('http://localhost:3000/department',
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            setDepartments(res.data.departments)
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
 
     const handleChangeRole = (e) => {
         const { value, checked } = e.target;
@@ -29,12 +45,10 @@ const AddUserModal = ({onClose, onUserAdded}) => {
         
     }
 
-    console.log(roles)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        if(!firstName || !lastName || !email || !college || !department || !username || !password || !roles){
+        if(!firstName || !lastName || !email || !college || !departmentId || !username || !password || roles.length === 0){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -44,7 +58,7 @@ const AddUserModal = ({onClose, onUserAdded}) => {
         }
 
         try {
-            const res = await axios.post('http://localhost:3000/user/addUser', {firstName, lastName, email, college, department, username, password, roles},
+            const res = await axios.post('http://localhost:3000/user/addUser', {firstName, lastName, email, college, departmentId, username, password, roles},
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -59,9 +73,13 @@ const AddUserModal = ({onClose, onUserAdded}) => {
             });
 
         } catch (error) {
-            console.log(error.response.data)
+            console.log(error.response)
         }
     }
+
+    useEffect(() => {
+        fetchDepartments()
+    },[])
 
     return (
         <div className=' fixed inset-0 bg-black/50'>
@@ -107,11 +125,13 @@ const AddUserModal = ({onClose, onUserAdded}) => {
                                     </div>
                                     <div className='flex-1 flex flex-col gap-1 mb-3'>
                                         <label htmlFor="department"className='text-sm text-[#797979]'>Department</label>
-                                        <select onChange={(e) => setDepartment(e.target.value)} value={department} className='flex-1 border-1 border-black outline-none rounded-sm px-3 py-2 text-sm'>
+                                        <select onChange={(e) => setDepartmentId(e.target.value)} value={departmentId} className='flex-1 border-1 border-black outline-none rounded-sm px-3 py-2 text-sm'>
                                             <option value="">Select Department</option>
-                                            <option value="BSIT">BSIT</option>
-                                            <option value="BSCE">BSCE</option>
-                                            <option value="BSABE">BSABE</option>
+                                            {
+                                                departments.map(department => (
+                                                    <option key={department.department_id} value={department.department_id}>{department.department_name}</option>
+                                                ))
+                                            }
                                         </select>
                                     </div>
                                 

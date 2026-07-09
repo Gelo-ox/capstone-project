@@ -16,19 +16,23 @@ const ForReview = () => {
     const [isEditOpen, setEditIsOpen] = useState(false)
     const [selectedUser, setSelectedUser] = useState(null)
     const [ipcr, setIPCR] = useState([])
+    const [search, setSearch] = useState("");
     const [allUsers, setAllUsers] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const {token} = useContext(AuthContext)
 
 
     const fetchAllUsers = async () => {
         try {
-            const res = await axios.get('http://localhost:3000/user/users', 
+            const res = await axios.get(`http://localhost:3000/user/users?search=${search}`, 
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }
             )
+            console.log(res.data.users)
+            setIsLoading(false)
             setAllUsers(res.data.users)
         } catch (error) {
             console.log(error)
@@ -38,6 +42,11 @@ const ForReview = () => {
     const handleEdit = (user) => {
         setEditIsOpen(true)
         setSelectedUser(user)
+    }
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+        setIsLoading(true)
     }
 
     const handleDelete = async (id) => {
@@ -73,9 +82,31 @@ const ForReview = () => {
         }
     }
 
+    const highlightText = (text, search) => {
+        if(!search) return text;
+
+        const lowerText = text.toLowerCase();
+        const lowerSearch = search.toLowerCase();
+
+        const index = lowerText.indexOf(lowerSearch);
+
+        if(index === -1) return text;
+
+        return (
+            <>
+                {text.slice(0, index)}
+                <strong>{text.slice(index, index + search.length)}</strong>
+                {text.slice(index + search.length)}
+            </>
+        )
+    }
+
     useEffect(() => {
-        fetchAllUsers()
-    },[])
+        setTimeout(() => {
+            fetchAllUsers()
+        }, 500)
+        
+    },[search])
     
     return (
         <div className='p-10'> 
@@ -89,7 +120,7 @@ const ForReview = () => {
             <div className='bg-white rounded-sm p-5 overflow-x-auto'>
                 <div className='flex justify-end gap-10 mb-5'>
                     <div className='flex p-2 rounded-md items-center gap-5 bg-gray-100'>
-                        <input type="text" placeholder='Search...' className=' text-md focus:outline-none'/>
+                        <input onChange={handleSearch} type="text" placeholder='Search...' className=' text-md focus:outline-none'/>
                         <Search className='w-5 h-5'/>
                     </div>
                     <div className='flex items-center bg-gray-100 p-3 gap-5'>
@@ -117,10 +148,21 @@ const ForReview = () => {
                         </thead>
                         <tbody>
                             {
+                                isLoading ? 
+                                (
+                                    <tr>
+                                        <td>
+                                            Loading...
+                                        </td>
+                                    </tr>) : 
                                 allUsers.map(user => (
                                     <tr key={user.id} className='hover:bg-gray-100 border'>
-                                        <td className='p-4 border'>{user.first_name} {user.last_name}</td>
-                                        <td className='p-4 border'>{user.department_id}</td>
+                                        <td className='p-4 border'>
+                                            {
+                                                highlightText(`${user.first_name} ${user.last_name}`, search)
+                                            }
+                                        </td>
+                                        <td className='p-4 border'>{user.department}</td>
                                         <td className='p-4 border'>{user.college_id}</td>
                                         <td className='p-4 border'>active</td>
                                         <td className='p-4 border'>{user.role.join(", ")}</td>

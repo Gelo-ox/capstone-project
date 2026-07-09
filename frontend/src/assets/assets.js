@@ -59,6 +59,12 @@ export const menuItems = [
         roles: ["HR","PDO"],
         icon: CalendarDays
     },
+    {
+        label: "Departments",
+        path: "/department",
+        roles: ["hr","department head","dean"],
+        icon: User
+    },
 ]
 
 export const ipcrSubmissionModule = [

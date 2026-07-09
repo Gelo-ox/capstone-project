@@ -9,6 +9,8 @@ import Users from './pages/Users.jsx'
 import SubmissionManagement from './pages/SubmissionManagement.jsx'
 import Login from './pages/Login.jsx'
 import Layout from './components/Layout.jsx'
+import Department from './pages/Department.jsx'
+import AddDepartment from './components/modals/AddDepartment.jsx'
 
 const App = () => {
   return ( 
@@ -20,6 +22,8 @@ const App = () => {
           <Route path='/review' element={<ForReview/>}/>
           <Route path='/users' element={<Users/>}/>
           <Route path='/submission-management' element={<SubmissionManagement/>}/>
+          <Route path='/submission-management' element={<SubmissionManagement/>}/>
+          <Route path='/department' element={<Department/>}/>
         </Route>
       </Routes>
   )
